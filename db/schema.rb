@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_19_054537) do
+ActiveRecord::Schema.define(version: 2022_10_19_235818) do
+
+  create_table "nearest_stations", force: :cascade do |t|
+    t.string "line"
+    t.string "station_name"
+    t.integer "walking_minutes"
+    t.integer "property_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["property_id"], name: "index_nearest_stations_on_property_id"
+  end
 
   create_table "properties", force: :cascade do |t|
     t.string "property_name"
@@ -22,4 +32,5 @@ ActiveRecord::Schema.define(version: 2022_10_19_054537) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "nearest_stations", "properties"
 end
